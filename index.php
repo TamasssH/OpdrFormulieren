@@ -1,3 +1,11 @@
+<?php
+if(isset($_POST["submit"])){
+    $naam = $_POST["naam"];
+    $land = $_POST["Lands"];
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +20,14 @@
 
     Naam:<input type="text" name="naam" placeholder="Uw naam" required /><br />
 
-    Land:<select name="land">
-            <option value="" selected>Maak uw Keuze: </option> 
-            <option value="NL">Nederland</option> 
-            <option value="DE">Duitsland</option> 
-            <option value="EN">Engeland</option>
-            <option value="Fr">Frans</option>
-            <option value="Es">Spaans</option>
-            <option value="It">Italiaans</option>
+    Land:<select name="Lands" >
+            <option value="" <?php if($land == "") {echo "selected";} ?> >Maak uw Keuze: </option> 
+            <option value="Nl" <?php if($land == "Nl") {echo "selected";} ?> >Nederland</option> 
+            <option value="De" <?php if($land == "De") {echo "selected";} ?> >Duitsland</option> 
+            <option value="En" <?php if($land == "En") {echo "selected";} ?> >Engeland</option>
+            <option value="Fr" <?php if($land == "Fr") {echo "selected";} ?> >Frans</option>
+            <option value="Es" <?php if($land == "Es") {echo "selected";} ?> >Spaans</option>
+            <option value="It"<?php if($land == "It") {echo "selected";} ?> >Italiaans</option>
          </select>
 
         <br />
@@ -28,31 +36,29 @@
 
 <?php
     if(isset($_POST["submit"])){
-        $naam = $_POST["naam"];
-        $land = $_POST["land"];
-
-        if($land==""){
-            echo "Weet je zeker dat je het wilt versturen zonder taal?";
-        }
-        if($land=="NL"){
-            echo "Goedemorgen ".$naam;
-        }
-        elseif($land=="DE"){
-            echo "Guten Morgen ".$naam;
-        }
-        elseif($land=="EN"){
-            echo "Good Morning ".$naam;
-        }
-        elseif($land=="Fr"){
-            echo "bonjour ".$naam;
-        }
-        elseif($land=="Es"){
-            echo "Buenos días ".$naam;
-        }
-        elseif($land=="It"){
-            echo "Buongiorno ".$naam;
-    }
- }
+            switch ($land) {
+                case "Nl":
+                    echo "Goedenmorgen " . $naam;
+                    break;
+                case "De":
+                    echo "Guten morgen " . $naam;
+                    break;
+                case "En":
+                    echo "Good morning " . $naam;
+                    break;
+                case "Fr":
+                    echo "Bonjour " . $naam;
+                    break;
+                case "Es":
+                    echo "Buenos días " . $naam;
+                    break;
+                case "It":
+                    echo "Buongiorno " . $naam;
+                    break;
+                default:
+                    echo "U heeft geen land geselecteerd, weet u zeker dat u het wilt versturen?";
+                }
+            }
 ?>
 
 </body>
